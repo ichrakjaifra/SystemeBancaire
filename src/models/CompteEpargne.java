@@ -1,13 +1,13 @@
-package metier;
+package models;
 
 import java.util.UUID;
 
-public class CompteCourant extends Compte {
-    private double decouvert;
+public class CompteEpargne extends Compte {
+    private double tauxInteret;
 
-    public CompteCourant(String code, double solde, double decouvert) {
+    public CompteEpargne(String code, double solde, double tauxInteret) {
         super(code, solde);
-        this.decouvert = decouvert;
+        this.tauxInteret = tauxInteret;
     }
 
     @Override
@@ -16,10 +16,10 @@ public class CompteCourant extends Compte {
             throw new IllegalArgumentException("Le montant doit être positif");
         }
 
-        if (solde - montant >= -decouvert) {
+        if (solde >= montant) {
             solde -= montant;
             String numeroOperation = "RET-" + UUID.randomUUID().toString().substring(0, 8);
-            operations.add(new Retrait(numeroOperation, montant, "Distributeur ATM"));
+            operations.add(new Retrait(numeroOperation, montant, "Retrait épargne"));
             return true;
         }
         return false;
@@ -27,17 +27,17 @@ public class CompteCourant extends Compte {
 
     @Override
     public double calculerInteret() {
-        return 0; // Pas d’intérêts sur compte courant
+        return solde * tauxInteret / 100;
     }
 
     @Override
     public void afficherDetails() {
-        System.out.println("Compte Courant - Code: " + code +
+        System.out.println("Compte Épargne - Code: " + code +
                          ", Solde: " + solde +
-                         ", Découvert autorisé: " + decouvert);
+                         ", Taux d'intérêt: " + tauxInteret + "%");
     }
 
-    public double getDecouvert() {
-        return decouvert;
+    public double getTauxInteret() {
+        return tauxInteret;
     }
 }

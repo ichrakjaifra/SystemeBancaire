@@ -1,9 +1,11 @@
 package presentation;
 
 import service.ServiceBancaire;
-import metier.Operation;
+
 import java.util.List;
 import java.util.Scanner;
+
+import models.Operation;
 
 public class ApplicationBancaire {
     private ServiceBancaire serviceBancaire;

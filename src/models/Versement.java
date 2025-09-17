@@ -1,4 +1,4 @@
-package metier;
+package models;
 
 public class Versement extends Operation {
     private String source;
