@@ -1,10 +1,13 @@
 package models;
 
+import utilitaire.ValidationUtils;
+
 public class Versement extends Operation {
     private String source;
 
     public Versement(String numero, double montant, String source) {
         super(numero, montant);
+        ValidationUtils.validerSource(source);
         this.source = source;
     }
 
@@ -17,8 +20,16 @@ public class Versement extends Operation {
         return source;
     }
 
+    public void setSource(String source) {
+        ValidationUtils.validerSource(source);
+        this.source = source;
+    }
+
     @Override
     public String toString() {
-        return "Versement [numero=" + numero + ", date=" + date + ", montant=" + montant + ", source=" + source + "]";
+        return "Versement [numero=" + getNumero() + 
+               ", date=" + getDate() + 
+               ", montant=" + getMontant() + 
+               ", source=" + source + "]";
     }
 }

@@ -1,10 +1,8 @@
 package presentation;
 
 import service.ServiceBancaire;
-
 import java.util.List;
 import java.util.Scanner;
-
 import models.Operation;
 
 public class ApplicationBancaire {
@@ -18,6 +16,7 @@ public class ApplicationBancaire {
 
     public void demarrer() {
         boolean quitter = false;
+        System.out.println("Bienvenue dans le système de gestion bancaire!");
         
         while (!quitter) {
             afficherMenu();
@@ -53,7 +52,6 @@ public class ApplicationBancaire {
                     System.out.println("Option invalide. Veuillez réessayer.");
             }
         }
-        
         scanner.close();
     }
 
@@ -75,9 +73,8 @@ public class ApplicationBancaire {
         System.out.println("1. Compte Courant");
         System.out.println("2. Compte Épargne");
         int type = getEntier("Choisissez le type de compte: ");
-        
         double soldeInitial = getDouble("Solde initial: ");
-        
+
         if (type == 1) {
             double decouvert = getDouble("Découvert autorisé: ");
             serviceBancaire.creerCompteCourant(soldeInitial, decouvert);
@@ -94,24 +91,14 @@ public class ApplicationBancaire {
         String codeCompte = getString("Code du compte: ");
         double montant = getDouble("Montant: ");
         String source = getString("Source (ex: Virement, Espèces): ");
-        
-        try {
-            serviceBancaire.deposer(codeCompte, montant, source);
-        } catch (Exception e) {
-            System.out.println("Erreur: " + e.getMessage());
-        }
+        serviceBancaire.deposer(codeCompte, montant, source);
     }
 
     private void effectuerRetrait() {
         System.out.println("\n--- Retrait ---");
         String codeCompte = getString("Code du compte: ");
         double montant = getDouble("Montant: ");
-        
-        try {
-            serviceBancaire.retirer(codeCompte, montant);
-        } catch (Exception e) {
-            System.out.println("Erreur: " + e.getMessage());
-        }
+        serviceBancaire.retirer(codeCompte, montant);
     }
 
     private void effectuerVirement() {
@@ -119,46 +106,39 @@ public class ApplicationBancaire {
         String compteSource = getString("Compte source: ");
         String compteDestination = getString("Compte destination: ");
         double montant = getDouble("Montant: ");
-        
-        try {
-            serviceBancaire.transferer(compteSource, compteDestination, montant);
-        } catch (Exception e) {
-            System.out.println("Erreur: " + e.getMessage());
-        }
+        serviceBancaire.transferer(compteSource, compteDestination, montant);
     }
 
     private void consulterSolde() {
         System.out.println("\n--- Consultation de solde ---");
         String codeCompte = getString("Code du compte: ");
-        
-        try {
-            double solde = serviceBancaire.getSolde(codeCompte);
+        double solde = serviceBancaire.getSolde(codeCompte);
+        if (solde >= 0) {
             System.out.println("Solde du compte " + codeCompte + ": " + solde);
-        } catch (Exception e) {
-            System.out.println("Erreur: " + e.getMessage());
         }
     }
 
     private void consulterOperations() {
         System.out.println("\n--- Consultation des opérations ---");
         String codeCompte = getString("Code du compte: ");
+        List<Operation> operations = serviceBancaire.getOperations(codeCompte);
         
-        try {
-            List<Operation> operations = serviceBancaire.getOperations(codeCompte);
-            if (operations.isEmpty()) {
-                System.out.println("Aucune opération pour ce compte.");
-            } else {
-                System.out.println("Opérations du compte " + codeCompte + ":");
-                operations.forEach(op -> System.out.println(op));
-            }
-        } catch (Exception e) {
-            System.out.println("Erreur: " + e.getMessage());
+        if (operations.isEmpty()) {
+            System.out.println("Aucune opération pour ce compte.");
+        } else {
+            System.out.println("Opérations du compte " + codeCompte + ":");
+            operations.forEach(System.out::println);
         }
     }
 
     private void voirTousComptes() {
         System.out.println("\n--- Tous les comptes ---");
-        serviceBancaire.getTousLesComptes().forEach(compte -> compte.afficherDetails());
+        List<models.Compte> comptes = serviceBancaire.getTousLesComptes();
+        if (comptes.isEmpty()) {
+            System.out.println("Aucun compte créé.");
+        } else {
+            comptes.forEach(models.Compte::afficherDetails);
+        }
     }
 
     private int getEntier(String message) {
