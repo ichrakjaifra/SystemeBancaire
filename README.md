@@ -61,6 +61,20 @@ Le projet est organisé en plusieurs packages :
 
 ---
 
+## Présentation du projet
+Une présentation visuelle du projet est disponible sur Canva :  
+[Voir la présentation](https://www.canva.com/design/DAGzbwMg4pA/zfum1ZBeXQyFYn4wPlfQjA/edit?utm_content=DAGzbwMg4pA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+Cette présentation contient :  
+- Le contexte du projet  
+- La structure de l'application  
+- Les classes principales et leur rôle  
+- Les fonctionnalités principales  
+- Un aperçu du menu et de l'interface utilisateur
+
+
+---
+
 ## Instructions d'installation et d'exécution
 1. Cloner le dépôt GitHub :  
    ```bash
