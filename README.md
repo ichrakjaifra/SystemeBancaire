@@ -72,6 +72,11 @@ Cette présentation contient :
 - Les fonctionnalités principales  
 - Un aperçu du menu et de l'interface utilisateur
 
+---
+
+## Gestion de projet (Jira)
+Le suivi des tâches et la gestion du projet ont été réalisés avec **Jira**.  
+👉 [Accéder au tableau Jira](https://ichrakjaifra-1758033929972.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiODlmMmY3YmE5YTQ4NDJkN2FmNTRkYjgwNjFjOGQyYjEiLCJwIjoiaiJ9)  
 
 ---
 
