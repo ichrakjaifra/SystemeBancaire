@@ -64,4 +64,4 @@ Le projet est organisé en plusieurs packages :
 ## Instructions d'installation et d'exécution
 1. Cloner le dépôt GitHub :  
    ```bash
-   git clone <lien_du_depot>
+   git clone https://github.com/ichrakjaifra/SystemeBancaire.git
